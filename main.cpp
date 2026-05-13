@@ -46,8 +46,24 @@ int main() {
     std::cout << moved_client << '\n';
     bank_account_t acc1("mihai_emi", "1234", moved_client, bank, 5000, {});
     std::cout << acc1 << '\n';
+
+    std::cout << "[t-atm polymorphism (poly doar in c++, nu relatii)] Adding transactions\n";
+    acc1.add_transaction(std::make_shared<deposit_transaction_t>(1000, "2026-04-27 10:00", "ATM"));
+    acc1.add_transaction(std::make_shared<withdrawal_transaction_t>(200, "2026-04-27 11:00", 2.5));
+    acc1.add_transaction(std::make_shared<transfer_transaction_t>(500, "2026-04-27 12:00", "RO123456789"));
+    acc1.add_transaction(std::make_shared<payment_transaction_t>(50, "2026-04-27 13:00", "Supermarket"));
+
+    std::cout << "Executing all transactions:\n";
+    acc1.execute_all_transactions();
+
+    std::cout << "\nCalculating total fees using dynamic_cast:\n";
+    acc1.calculate_total_withdrawal_fees();
+
+    std::cout << "\nTotal transactions created: " << transaction_t::get_total_transactions() << "\n";
+
+    std::cout << "Account with transactions:\n" << acc1 << '\n';
     bank_account_t acc_copy(acc1);
-    std::cout << "ACCOUNT COPY: " <<acc_copy << '\n';
+    std::cout << "ACCOUNT COPY: " << acc_copy << '\n';
 
     std::cout << "[t-atm m am plictisit] Saving Bank Data to JSON\n";
     bank.save();
