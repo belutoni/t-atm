@@ -83,4 +83,17 @@ public:
     void execute() override;
 };
 
+class currency_exchange_transaction_t : public transaction_t {
+private:
+    std::string from_currency;
+    std::string to_currency;
+    double exchange_rate;
+protected:
+    void print(std::ostream& os) const override;
+public:
+    currency_exchange_transaction_t(double amount, const std::string &timestamp, std::string from, std::string to, double rate);
+    [[nodiscard]] std::shared_ptr<transaction_t> clone() const override;
+    void execute() override;
+};
+
 #endif //OOP_TRANSACTION_H
