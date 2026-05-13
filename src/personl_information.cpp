@@ -10,6 +10,7 @@ std::ostream &operator<<(std::ostream &os, const personl_information_t &pi) {
             << "phone_number: " << pi.phone << '\n'
             << "email: " << pi.email << '\n'
             << "address: " << pi.address << '\n';
+
     return os;
 }
 

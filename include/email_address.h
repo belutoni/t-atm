@@ -31,7 +31,7 @@ public:
 
 
 class email_address_t {
-private:
+protected:
     std::string value;
 
 public:

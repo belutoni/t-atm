@@ -31,7 +31,7 @@ public:
 };
 
 class phone_number_t {
-private:
+protected:
     static constexpr size_t PHONE_NUMBER_LENGTH = 10;
     static constexpr auto PHONE_NUMBER_PREFIX = "07";
     std::string value;

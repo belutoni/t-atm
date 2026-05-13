@@ -17,11 +17,9 @@ std::ostream &operator<<(std::ostream& os, const bank_account_t& bank_account) {
         return os;
     }
 
-    for (const auto& transaction : bank_account.transactions) {
-        if (transaction) {
+    for (const auto& transaction : bank_account.transactions)
+        if (transaction)
             os << "> " << *transaction << "\n";
-        }
-    }
 
     return os;
 }
@@ -29,13 +27,8 @@ std::ostream &operator<<(std::ostream& os, const bank_account_t& bank_account) {
 bank_account_t::bank_account_t(const bank_account_t &other) 
     : identifier(other.identifier), username(other.username), pin(other.pin),
       client(other.client), bank(other.bank), balance(other.balance) {
-    for (const auto& t : other.transactions) {
-        if (t) {
-            transactions.push_back(t->clone());
-        } else {
-            transactions.push_back(nullptr);
-        }
-    }
+    for (const auto& t : other.transactions)
+        transactions.push_back(t ? t->clone() : nullptr);
 }
 
 void swap(bank_account_t& first, bank_account_t& second) noexcept {
@@ -59,19 +52,17 @@ void bank_account_t::add_transaction(const std::shared_ptr<transaction_t>& trans
 }
 
 void bank_account_t::execute_all_transactions() const {
-    for (auto& transaction : transactions) {
-        if (transaction) {
+    for (auto& transaction : transactions)
+        if (transaction)
             transaction->execute();
-        }
-    }
 }
 
 void bank_account_t::calculate_total_withdrawal_fees() const {
     double total_fees = 0.0;
-    for (const auto& transaction : transactions) {
-        if (const auto wt = std::dynamic_pointer_cast<withdrawal_transaction_t>(transaction)) {
+    for (const auto& transaction : transactions)
+        if (const auto wt = std::dynamic_pointer_cast<withdrawal_transaction_t>(transaction))
             total_fees += wt->get_fee();
-        }
-    }
+
+
     std::cout << "Total withdrawal fees for account " << identifier << " is: " << total_fees << "\n";
 }

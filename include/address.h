@@ -9,12 +9,11 @@
 #include "nlohmann/json.hpp"
 
 class address_t {
-private:
+protected:
     std::string street_name;
     std::string postal_code;
     std::string city;
     std::string state;
-
 public:
     address_t() = default;
     address_t(
@@ -29,6 +28,8 @@ public:
     [[nodiscard]] std::string get_address_line() const;
 
     friend std::ostream &operator<<(std::ostream &os, const address_t &email);
+
+    // JSON
     friend void to_json(nlohmann::json &j, const address_t &a);
     friend void from_json(const nlohmann::json &j, address_t &a);
 };

@@ -14,7 +14,7 @@
 #include "nlohmann/json.hpp"
 
 class personl_information_t {
-private:
+protected:
     std::string first_name;
     std::string last_name;
     phone_number_t phone;

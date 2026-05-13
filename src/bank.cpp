@@ -13,6 +13,7 @@ bank_t& bank_t::operator=(const bank_t& other) {
         name = other.name;
         clients = other.clients;
     }
+
     return *this;
 }
 
@@ -23,6 +24,7 @@ void bank_t::add_client(const client_t& client) {
 void bank_t::remove_client(const size_t index) {
     if (index >= clients.size())
         return;
+
     clients.erase(clients.begin() + static_cast<long>(index));
 }
 
@@ -48,13 +50,16 @@ bank_t bank_t::load(const std::string& filepath) {
     bank_t bank;
     bank.name = j.at("bank_name").get<std::string>();
     bank.clients = j.at("clients").get<std::vector<client_t>>();
+
     return bank;
 }
 
 std::string bank_t::get_identifier() const {
     std::string identifier = this->name;
     std::erase_if(identifier, isspace);
-    std::ranges::transform(identifier.begin(), identifier.end(), identifier.begin(), [](const unsigned char c) { return std::tolower(c); });
+    // smart pants
+    std::ranges::transform(identifier.begin(), identifier.end(), identifier.begin(), [](const char c) { return std::tolower(c); });
+
     return identifier.substr(0, 3);
 }
 
@@ -62,5 +67,6 @@ std::ostream& operator<<(std::ostream& os, const bank_t& bank) {
     os << "bank: " << bank.name << " (" << bank.clients.size() << " clients)\n";
     for (size_t i = 0; i < bank.clients.size(); i++)
         os << "[" << i << "] " << bank.clients[i] << "\n";
+
     return os;
 }

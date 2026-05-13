@@ -8,10 +8,12 @@
 
 
 class base_exception : public std::exception {
-private:
+protected:
     std::string message;
 public:
-    explicit base_exception(std::string from, std::string message) {
+    explicit base_exception(
+        std::string from,
+        std::string message) {
         this->message = "[" + std::move(from) + "] " + std::move(message);
     }
 

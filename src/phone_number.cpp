@@ -6,6 +6,7 @@
 
 std::ostream &operator<<(std::ostream &os, const phone_number_t &pn) {
     os << pn.value;
+    
     return os;
 }
 
