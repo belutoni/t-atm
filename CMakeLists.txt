@@ -68,6 +68,13 @@ add_executable(${MAIN_EXECUTABLE_NAME}
         include/transaction.h
         src/bank_account.cpp
         include/bank_account.h
+        src/bank_manager.cpp
+        include/bank_manager.h
+        src/transaction_factory.cpp
+        include/transaction_factory.h
+        src/atm_cli.cpp
+        include/atm_cli.h
+        include/repository.h
 )
 
 # NOTE: Add all defined targets (e.g. executables, libraries, etc. )
