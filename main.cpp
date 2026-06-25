@@ -4,7 +4,7 @@
 int main() {
     try {
         atm_cli_t cli;
-        cli.start();
+        //cli.start();
     } catch (const std::exception& e) {
         std::cerr << "it crapped somewhere: " << e.what() << "\n";
         return 1;
