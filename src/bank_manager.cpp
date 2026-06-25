@@ -24,7 +24,7 @@ repository_t<bank_t>& bank_manager_t::get_banks() {
 }
 
 void bank_manager_t::load_banks_from_disk() {
-    constexpr std::string directory = "assets";
+    const std::string directory = "assets";
     if (!std::filesystem::exists(directory) || !std::filesystem::is_directory(directory)) {
         return;
     }
